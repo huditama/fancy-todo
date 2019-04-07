@@ -2,12 +2,13 @@ const express = require('express')
 const router = express.Router()
 const toDoController = require('../../controllers/toDoController')
 const authenticate = require('../../middlewares/authenticate')
+const authorize = require('../../middlewares/authorize')
 
 router.use(authenticate)
 router.get('/', toDoController.findAll)
 router.post('/', toDoController.create)
-router.patch('/complete/:id', toDoController.complete)
-router.patch('/uncomplete/:id', toDoController.unComplete)
-router.delete('/:id', toDoController.delete)
+router.patch('/complete/:id', authorize, toDoController.complete)
+router.patch('/uncomplete/:id', authorize, toDoController.unComplete)
+router.delete('/:id', authorize, toDoController.delete)
 
 module.exports = router
