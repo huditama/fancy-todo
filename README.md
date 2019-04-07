@@ -5,7 +5,7 @@ Fancy To Do
 $ npm install
 $ node app.js
 ```
-Access client via `http://localhost:8080`
+Access client via `http://localhost:8080`<br>
 Access server via `http://localhost:3000`
 
 ##  Routes
