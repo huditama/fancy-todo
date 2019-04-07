@@ -1,0 +1,50 @@
+/* Homepage */
+
+#homepage_text {
+    margin-top: 20%;
+}
+
+/* Sign Up Form */
+
+#signUpForm {
+    width: 30%;
+    margin-top: 8%;
+}
+
+/* Sign In Form */
+
+#signInForm {
+    width: 30%;
+    margin-top: 8%;
+}
+
+/* Dashboard Title */
+
+#dashboardTitle {
+    margin: 3%;
+}
+
+/* Input Title */
+
+#createToDo {
+    margin-top: 3%;
+}
+
+/* Card Grid */
+
+#dashboard {
+    margin-top: 1%;
+}
+
+/* Card Column */
+
+#card_column {
+    margin: 1.5%;
+}
+
+/* No Task Alert */
+
+#noTasks {
+    margin-top: 15%;
+    width: 30%;
+}
