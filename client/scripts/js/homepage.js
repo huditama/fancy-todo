@@ -45,6 +45,10 @@ $(document).ready(function () {
     $('#click_create').click(function () {
         $('#createTaskForm').show()
     })
+
+    $('#click_update').click(function () {
+        $('#createTaskForm').show()
+    })
 })
 
 //Check if token is still present in localStorage

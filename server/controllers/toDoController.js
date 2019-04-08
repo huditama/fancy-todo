@@ -9,6 +9,15 @@ class toDoController {
             .catch((err) => { res.status(500).json(err.message) })
     }
 
+    static findOne(req, res) {
+        const { id } = req.params
+        ToDo
+            .findOne({ _id: id })
+            .populate('UserId')
+            .then((findOneToDo) => { res.status(200).json(findOneToDo) })
+            .catch((err) => { res.status(500).json(err.message) })
+    }
+
     static create(req, res) {
         const { name, description, due_date, UserId } = req.body
         ToDo
@@ -28,6 +37,14 @@ class toDoController {
         ToDo
             .findByIdAndUpdate(req.params.id, { completedAt: null }, { new: true })
             .then((updatedToDo) => { res.status(200).json({ message: 'Unchecked task!', updatedToDo }) })
+            .catch((err) => { res.status(500).json(err.message) })
+    }
+
+    static update(req, res) {
+        const { name, description, due_date } = req.body
+        ToDo
+            .findByIdAndUpdate(req.params.id, { name, description, due_date }, { new: true })
+            .then((updatedToDo) => { res.status(200).json({ message: 'Updated task!', updatedToDo }) })
             .catch((err) => { res.status(500).json(err.message) })
     }
 

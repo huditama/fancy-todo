@@ -37,6 +37,8 @@ function getTaskCards() {
                                     <p class="card-subtitle mb-2 text-muted">Completed at: ${completedAt}</p>
                                     <p class="card-text">${task.description}</p>
                                     ${action}
+                                    <a href="#" class="card-link" id="click_create" data-toggle="modal"
+                                    data-target="#updateTaskForm" onclick="getUpdateTaskForm('${task._id}')">Update</a>
                                     <a href="#" class="card-link" onclick="deleteTask('${task._id}')">Delete</a>
                                 </div>
                             </div>
@@ -112,6 +114,65 @@ function unCompleteTask(TaskId) {
         })
 }
 
+function getUpdateTaskForm(TaskId) {
+    let token = localStorage.getItem('token')
+    $.ajax({
+        url: `http://localhost:3000/toDo/${TaskId}`,
+        method: "GET",
+        headers: { token }
+    })
+        .done((response) => {
+            let html = `
+            <div class="modal-body">
+                <form id="updateToDo">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input type="text" class="form-control" id="inputTitleUpdate" value="${response.name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                        <textarea class="form-control" id="inputDescriptionUpdate" rows="3" required>${response.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDueDate">Due Date</label>
+                        <input type="datetime-local" class="form-control" id="inputDueDateUpdate" value="${new Date(response.due_date).toISOString().slice(0, 16)}" required>
+                    </div>
+            </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="updateTask('${TaskId}')">Submit!</button>
+                </div>`
+            $('#inputUpdateData').html(html)
+        })
+        .fail((jqXHR, textStatus) => {
+            console.log('Request failed!', textStatus)
+        })
+}
+
+function updateTask(TaskId) {
+    event.preventDefault()
+    let token = localStorage.getItem('token')
+    const name = $('#inputTitleUpdate').val()
+    const description = $('#inputDescriptionUpdate').val()
+    const due_date = $('#inputDueDateUpdate').val()
+    $.ajax({
+        url: `http://localhost:3000/toDo/${TaskId}`,
+        method: 'PATCH',
+        data: { name, description, due_date },
+        headers: { token }
+    })
+        .done((response) => {
+            swal("Success!", response.message, "success");
+            getTaskCards()
+            $('#updateTaskModal').hide()
+        })
+        .fail((jqXHR, textStatus) => {
+            console.log('Request failed!', textStatus)
+        })
+}
+
+
 function deleteTask(TaskId) {
     let token = localStorage.getItem('token')
     $.ajax({
@@ -131,9 +192,7 @@ function deleteTask(TaskId) {
                     if (willDelete) {
                         swal("Success!", response.message, "success");
                         getTaskCards()
-                    } else {
-                        getTaskCards
-                    }
+                    } else getTaskCards()
                 })
         })
         .fail((jqXHR, textStatus) => {
