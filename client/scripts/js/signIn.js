@@ -4,7 +4,7 @@ function signIn() {
     const password = $('#passwordSignIn').val()
 
     $.ajax({
-        url: 'http://localhost:3000/users/signIn',
+        url: `${serverUrl}/users/signIn`,
         method: 'POST',
         data: { email, password }
     })
@@ -34,7 +34,7 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
     $.ajax({
-        url: 'http://localhost:3000/users/googleSignIn',
+        url: `${serverUrl}/users/googleSignIn`,
         method: 'POST',
         data: { token: id_token }
     })

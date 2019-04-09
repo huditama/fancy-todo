@@ -1,3 +1,5 @@
+let serverUrl = 'http://localhost:3000'
+
 $(document).ready(function () {
     if (localStorage.getItem('token')) isLoggedIn(true)
     else isLoggedIn(false)

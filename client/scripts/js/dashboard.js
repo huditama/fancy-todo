@@ -1,7 +1,7 @@
 function getTaskCards() {
     let token = localStorage.getItem('token')
     $.ajax({
-        url: `http://localhost:3000/toDo`,
+        url: `${serverUrl}/toDo`,
         method: 'GET',
         headers: { token }
     })
@@ -64,7 +64,7 @@ function createTask() {
     const UserId = localStorage.getItem('UserId')
 
     $.ajax({
-        url: 'http://localhost:3000/toDo',
+        url: `${serverUrl}/toDo`,
         method: 'POST',
         data: { name, description, due_date, UserId },
         headers: { token }
@@ -85,7 +85,7 @@ function createTask() {
 function completeTask(TaskId) {
     let token = localStorage.getItem('token')
     $.ajax({
-        url: `http://localhost:3000/toDo/complete/${TaskId}`,
+        url: `${serverUrl}/toDo/complete/${TaskId}`,
         method: 'PATCH',
         headers: { token }
     })
@@ -101,7 +101,7 @@ function completeTask(TaskId) {
 function unCompleteTask(TaskId) {
     let token = localStorage.getItem('token')
     $.ajax({
-        url: `http://localhost:3000/toDo/uncomplete/${TaskId}`,
+        url: `${serverUrl}/toDo/uncomplete/${TaskId}`,
         method: 'PATCH',
         headers: { token }
     })
@@ -117,7 +117,7 @@ function unCompleteTask(TaskId) {
 function getUpdateTaskForm(TaskId) {
     let token = localStorage.getItem('token')
     $.ajax({
-        url: `http://localhost:3000/toDo/${TaskId}`,
+        url: `${serverUrl}/toDo/${TaskId}`,
         method: "GET",
         headers: { token }
     })
@@ -157,7 +157,7 @@ function updateTask(TaskId) {
     const description = $('#inputDescriptionUpdate').val()
     const due_date = $('#inputDueDateUpdate').val()
     $.ajax({
-        url: `http://localhost:3000/toDo/${TaskId}`,
+        url: `${serverUrl}/toDo/${TaskId}`,
         method: 'PATCH',
         data: { name, description, due_date },
         headers: { token }
@@ -176,7 +176,7 @@ function updateTask(TaskId) {
 function deleteTask(TaskId) {
     let token = localStorage.getItem('token')
     $.ajax({
-        url: `http://localhost:3000/toDo/${TaskId}`,
+        url: `${serverUrl}/toDo/${TaskId}`,
         method: 'DELETE',
         headers: { token }
     })
