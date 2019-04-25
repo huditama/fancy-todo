@@ -10,7 +10,7 @@ function signUp() {
         method: 'POST',
         data: { first_name, last_name, email, password }
     }))
-        .done(() => {
+        .done((response) => {
             $('#signUpForm').hide()
             $('#signInForm').show()
             swal("Success!", response.message, "success");
