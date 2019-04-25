@@ -1,4 +1,4 @@
-let serverUrl = 'http://localhost:3000'
+let serverUrl = 'http://fancytodo-server.reyhanhuditama.com'
 
 $(document).ready(function () {
     if (localStorage.getItem('token')) isLoggedIn(true)

@@ -6,7 +6,7 @@ function signUp() {
     const password = $('#passwordRegister').val()
 
     $.ajax(({
-        url: 'http://localhost:3000/users/signUp',
+        url: `${serverUrl}/users/signUp`,
         method: 'POST',
         data: { first_name, last_name, email, password }
     }))
